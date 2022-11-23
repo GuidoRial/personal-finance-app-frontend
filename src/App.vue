@@ -8,9 +8,6 @@ export default {
   components: {
     Header,
   },
-  mounted() {
-    console.log(this.getRoute);
-  },
   computed: {
     getRoute() {
       return window.location.pathname;
@@ -19,24 +16,20 @@ export default {
 };
 </script>
 <style>
+:root {
+  --primary: #34a853;
+  --white: #fff;
+  --dark-gray: #181a20;
+  --red: #ef3b3a;
+  --soft-gray: #f2f2f2;
+  --input-bg: #b3b3b3;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
