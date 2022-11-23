@@ -1,7 +1,23 @@
 <template>
-  <router-view />
+  <Header v-if="this.getRoute !== '/login' && this.getRoute !== '/signup'" />
+  <router-view></router-view>
 </template>
-
+<script>
+import Header from "@/components/Header.vue";
+export default {
+  components: {
+    Header,
+  },
+  mounted() {
+    console.log(this.getRoute);
+  },
+  computed: {
+    getRoute() {
+      return window.location.pathname;
+    },
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
