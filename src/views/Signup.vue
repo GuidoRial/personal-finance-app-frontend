@@ -1,10 +1,23 @@
 <template>
-  <Auth />
+  <Auth @dataCollected="createAccount" />
 </template>
 <script>
 import Auth from "@/components/auth.vue";
+import authStore from "@/store/auth";
+import { mapActions } from "pinia";
 export default {
-  name: "login-page",
+  name: "signup-page",
   components: { Auth },
+  methods: {
+    ...mapActions(authStore, ["signUp"]),
+    async createAccount(data) {
+      // eslint-disable-next-line no-useless-catch
+      try {
+        await this.signUp(data);
+      } catch (e) {
+        throw e;
+      }
+    },
+  },
 };
 </script>
