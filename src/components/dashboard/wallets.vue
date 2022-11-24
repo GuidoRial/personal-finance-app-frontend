@@ -22,7 +22,6 @@ export default {
 .wallets {
   padding: 1rem 0 0 0;
   border-bottom: 2px solid var(--dark-gray);
-  border-right: 2px solid var(--dark-gray);
 }
 .title {
   display: flex;

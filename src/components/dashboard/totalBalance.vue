@@ -32,7 +32,6 @@ export default { name: "total-balance" };
   flex-direction: column;
   text-align: left;
   border-bottom: 2px solid var(--dark-gray);
-  border-right: 2px solid var(--dark-gray);
 }
 .balance {
   color: var(--white);

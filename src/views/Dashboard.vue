@@ -7,7 +7,7 @@
       <Budgets />
       <Savings />
     </div>
-    <div class="recent-transactions"></div>
+    <RecentTransactions />
   </div>
 </template>
 
@@ -17,6 +17,7 @@ import TotalBalance from "@/components/dashboard/totalBalance.vue";
 import Wallets from "@/components/dashboard/wallets.vue";
 import Budgets from "@/components/dashboard/budgets.vue";
 import Savings from "@/components/dashboard/savings.vue";
+import RecentTransactions from "@/components/dashboard/recentTransactions.vue";
 export default {
   name: "dashboard-page",
   data() {
@@ -31,6 +32,7 @@ export default {
     Wallets,
     Budgets,
     Savings,
+    RecentTransactions,
   },
 };
 </script>
@@ -39,9 +41,6 @@ export default {
   width: 100%;
 }
 
-.recent-transactions {
-  width: 45%;
-}
 .dashboard {
   background-color: var(--main-bg);
   height: calc(100vh - 4rem);
