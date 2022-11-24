@@ -14,6 +14,7 @@ export default {
       // eslint-disable-next-line no-useless-catch
       try {
         await this.signUp(data);
+        this.$router.push({ name: "dashboard" });
       } catch (e) {
         throw e;
       }
