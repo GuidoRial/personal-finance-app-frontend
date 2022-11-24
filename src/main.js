@@ -6,9 +6,25 @@ import App from "./App.vue";
 import router from "./router";
 const pinia = createPinia();
 
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faXmark,
+  faWallet,
+  faRightLeft,
+  faTable,
+  faPiggyBank,
+  faMoneyBillTransfer,
+} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faUser);
+library.add(
+  faUser,
+  faXmark,
+  faWallet,
+  faRightLeft,
+  faTable,
+  faPiggyBank,
+  faMoneyBillTransfer
+);
 
 createApp(App)
   .use(pinia)

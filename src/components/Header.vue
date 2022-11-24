@@ -1,11 +1,15 @@
 <template>
-  <div class="header">
+  <div class="nav-bar">
     <div class="app-name">BIRRITA</div>
     <div class="links-container">
       <ul class="links">
-        <li>Link</li>
-        <li>Link</li>
-        <li><font-awesome-icon icon="fa-solid fa-user" /></li>
+        <li class="link">Dashboard</li>
+        <li class="link">Billeteras</li>
+        <li class="link">Presupuestos</li>
+        <li class="link">Ahorros</li>
+        <li class="link">
+          <font-awesome-icon icon="fa-solid fa-user" />
+        </li>
       </ul>
     </div>
   </div>
@@ -15,7 +19,7 @@
 export default { name: "header" };
 </script>
 <style scoped>
-.header {
+.nav-bar {
   background-color: var(--dark-gray);
   width: 100%;
   height: 4rem;
@@ -35,5 +39,13 @@ export default { name: "header" };
   color: var(--primary);
   font-family: "Gothic A1", sans-serif;
   font-size: 1.7rem;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.link:hover {
+  color: var(--primary);
 }
 </style>
