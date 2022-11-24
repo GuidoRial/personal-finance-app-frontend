@@ -1,16 +1,21 @@
 <template>
-  <Header v-if="this.getRoute !== '/login' && this.getRoute !== '/signup'" />
-  <router-view></router-view>
+  <Header v-if="this.getRoute !== 'login' && this.getRoute !== 'signup'" />
+  <Viewer />
 </template>
 <script>
 import Header from "@/components/Header.vue";
+import Viewer from "@/components/viewer.vue";
 export default {
   components: {
     Header,
+    Viewer,
+  },
+  mounted() {
+    console.log(this.getRoute);
   },
   computed: {
     getRoute() {
-      return window.location.pathname;
+      return this.$route.name;
     },
   },
 };
