@@ -1,5 +1,5 @@
 <template>
-  <div>Test</div>
+  <div class="dashboard">Test</div>
 </template>
 
 <script>
@@ -10,3 +10,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.dashboard {
+  background-color: var(--main-bg);
+  height: 100vh;
+  color: var(--white);
+}
+</style>

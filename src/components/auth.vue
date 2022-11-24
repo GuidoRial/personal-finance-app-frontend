@@ -3,11 +3,14 @@
   <div class="form-container">
     <div class="login-page">
       <div class="form">
-        <h2>
-          {{ isLogin ? "Bienvenido de vuelta" : "Bienvenido a mi app" }}
-        </h2>
+        <h2 v-if="isLogin">Bienvenido de vuelta</h2>
+        <h2 v-else>Bienvenido a <span class="app-name">Birrita</span>🍺</h2>
         <h3>
-          {{ isLogin ? "" : "Completa el formulario para crear tu cuenta" }}
+          {{
+            isLogin
+              ? "Es bueno verte de nuevo"
+              : "Completa el formulario para crear tu cuenta"
+          }}
         </h3>
         <input
           v-model="userData.username"
@@ -165,6 +168,10 @@ export default {
 </script>
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.app-name {
+  color: var(--primary);
+  font-family: "Gothic A1", sans-serif;
+}
 
 .error-message {
   border: 1px solid var(--red);
@@ -175,11 +182,12 @@ export default {
   padding: 1rem 0.5rem;
 }
 .form-container {
-  width: 98vw;
-  height: 98vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--main-bg);
 }
 body {
   display: flex;
@@ -196,13 +204,20 @@ body {
 .form {
   position: relative;
   z-index: 1;
-  background: var(--white);
+  background: var(--dark-gray);
+  color: var(--white);
   max-width: 500px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+.form h2,
+.form h3 {
+  margin-bottom: 0.5rem;
+}
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -214,21 +229,7 @@ body {
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: var(--white);
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-}
-.form button {
-  background: var(--primary);
-}
+
 .form .message {
   margin: 15px 0 0;
   color: var(--input-bg);

@@ -17,11 +17,12 @@ export default {
 <style scoped>
 .message {
   margin: 15px 0 0;
-  color: #b3b3b3;
+  color: var(--soft-gray);
   font-size: 12px;
 }
 .message a {
-  color: #4caf50;
+  color: var(--primary);
   text-decoration: none;
+  font-weight: 700;
 }
 </style>
