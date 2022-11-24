@@ -38,6 +38,6 @@ export default {
 }
 
 .saving-balance {
-  color: var(--primary);
+  /* color: var(--white); */
 }
 </style>
