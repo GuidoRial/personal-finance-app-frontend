@@ -3,12 +3,39 @@
     <div class="title">
       <h3>Balance total</h3>
     </div>
-    <h2 class="balance">$1.000 USDT</h2>
-    <h2 class="balance">$100.000 ARS</h2>
+
+    <h2
+      class="balance"
+      v-for="(balance, i) in this.user?.totalBalance"
+      :key="i"
+    >
+      {{ this.getSymbol(balance) }}
+      {{ balance.total.toLocaleString() }} {{ balance.currency }}
+    </h2>
   </div>
 </template>
 <script>
-export default { name: "total-balance" };
+import useAuth from "@/store/auth";
+import { mapState } from "pinia";
+
+export default {
+  name: "total-balance",
+  computed: {
+    ...mapState(useAuth, ["user"]),
+  },
+  methods: {
+    getSymbol(balance) {
+      return balance.currency === "ARS" ||
+        balance.currency === "USD" ||
+        balance.currency === "USDT"
+        ? "$"
+        : "€";
+    },
+  },
+  mounted() {
+    console.log(this.user);
+  },
+};
 </script>
 <style scoped>
 .title {
