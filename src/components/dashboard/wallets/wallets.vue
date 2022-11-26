@@ -22,12 +22,12 @@
       secondText="Hacé click en el botón de 'Crear billetera' para crear una."
     />
   </div>
-  <DashboardWalletModal
+  <interactionWalletModal
     v-if="showCreateWalletModal"
     @cancelAction="reloadWalletsAndCloseModal"
     @walletCreated="afterCreatingWallet"
   />
-  <DashboardWalletModal
+  <interactionWalletModal
     v-if="showEditWalletModal"
     :isEdit="true"
     @cancelAction="reloadWalletsAndCloseModal"
@@ -45,8 +45,8 @@
 import Wallet from "@/components/dashboard/wallets/wallet.vue";
 import DashboardActionButton from "@/components/dashboard/shared/dashboardActionButton.vue";
 import DashboardNotFoundMessage from "@/components/dashboard/shared/dashboardNotFoundMessage.vue";
-import DashboardWalletModal from "@/components/dashboard/wallets/dashboardWalletModal.vue";
-import ConfirmationToDeleteModal from "@/components/dashboard/wallets/dashboardConfirmationToDeleteModal.vue";
+import interactionWalletModal from "@/components/dashboard/wallets/walletModal.vue";
+import ConfirmationToDeleteModal from "@/components/dashboard/wallets/confirmationToDeleteModal.vue";
 import { mapActions } from "pinia";
 import authStore from "@/store/auth";
 export default {
@@ -94,7 +94,7 @@ export default {
     Wallet,
     DashboardActionButton,
     DashboardNotFoundMessage,
-    DashboardWalletModal,
+    interactionWalletModal,
     ConfirmationToDeleteModal,
   },
   props: {
