@@ -82,7 +82,6 @@ export default {
     },
   },
   methods: {
-    // @TODO => Avoid opening modals over each other
     ...mapActions(authStore, ["getUserData"]),
     closeAllModals() {
       this.showCreateWalletModal = false;
