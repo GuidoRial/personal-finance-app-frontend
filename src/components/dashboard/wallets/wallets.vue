@@ -71,6 +71,16 @@ export default {
       showTransferModal: false,
     };
   },
+  computed: {
+    otherModalsAreOpen() {
+      return (
+        this.showCreateWalletModal ||
+        this.showEditWalletModal ||
+        this.showConfirmationToDeleteModal ||
+        this.showTransferModal
+      );
+    },
+  },
   methods: {
     // @TODO => Avoid opening modals over each other
     ...mapActions(authStore, ["getUserData"]),
@@ -95,20 +105,21 @@ export default {
       this.returnWalletsToDefaultValue();
     },
     openCreateWalletModal() {
-      if (this.showCreateWalletModal) return;
+      if (this.otherModalsAreOpen) return;
       this.showCreateWalletModal = true;
     },
     openEditWalletModal(data) {
-      if (this.showEditWalletModal) return;
+      if (this.otherModalsAreOpen) return;
       this.showEditWalletModal = true;
       this.walletToBeEdited = data;
     },
     openConfirmationToDeleteModal(data) {
-      if (this.showConfirmationToDeleteModal) return;
+      if (this.otherModalsAreOpen) return;
       this.showConfirmationToDeleteModal = true;
       this.walletToBeDeleted = data;
     },
     openTransferMoneyModal(data) {
+      if (this.otherModalsAreOpen) return;
       this.originWallet = data;
       this.showTransferModal = true;
     },
