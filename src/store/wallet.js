@@ -8,14 +8,20 @@ const useWallet = defineStore("wallet", {
   },
   actions: {
     // async updateWallet(data) {},
-    // async deleteWallet(id) {},
+    async deleteWallet(id) {
+      try {
+        const res = await walletService.deleteWallet(id);
+        return res.result;
+      } catch (e) {
+        throw e;
+      }
+    },
     // async getWalletById(id) {},
     async createWallet(wallet) {
       try {
         const res = await walletService.createWallet(wallet);
         return res.result;
       } catch (e) {
-        console.log(e);
         throw e;
       }
     },

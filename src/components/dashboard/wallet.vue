@@ -9,7 +9,11 @@
         icon="fa-solid fa-pen-to-square"
         @click="openEditModal"
       />
-      <font-awesome-icon v-if="hover" icon="fa-solid fa-trash" />
+      <font-awesome-icon
+        v-if="hover"
+        icon="fa-solid fa-trash"
+        @click="openConfirmationToDeleteModal"
+      />
     </div>
     <div class="wallet-balance">
       <h4>
@@ -40,6 +44,9 @@ export default {
   methods: {
     openEditModal() {
       this.$emit("clickOnEditModalIcon", this.wallet);
+    },
+    openConfirmationToDeleteModal() {
+      this.$emit("clickOnConfirmationToDeleteModalIcon", this.wallet);
     },
   },
 };

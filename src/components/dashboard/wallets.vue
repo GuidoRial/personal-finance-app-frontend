@@ -14,6 +14,7 @@
       :wallet="wallet"
       :key="i"
       @clickOnEditModalIcon="openEditWalletModal"
+      @clickOnConfirmationToDeleteModalIcon="openConfirmationToDeleteModal"
     />
     <DashboardNotFoundMessage
       v-else
@@ -33,12 +34,19 @@
     @walletEdited="reloadWalletsAndCloseModal"
     :walletToBeEdited="walletToBeEdited"
   />
+  <ConfirmationToDeleteModal
+    v-if="showConfirmationToDeleteModal"
+    :walletToBeDeleted="walletToBeDeleted"
+    @cancelDeleteWallet="showConfirmationToDeleteModal = false"
+    @walletDeleted="reloadWalletsAndCloseModal"
+  />
 </template>
 <script>
 import Wallet from "@/components/dashboard/wallet.vue";
 import DashboardActionButton from "@/components/dashboard/dashboardActionButton.vue";
 import DashboardNotFoundMessage from "@/components/dashboard/dashboardNotFoundMessage.vue";
 import DashboardWalletModal from "@/components/dashboard/dashboardWalletModal.vue";
+import ConfirmationToDeleteModal from "@/components/dashboard/dashboardConfirmationToDeleteModal.vue";
 import { mapActions } from "pinia";
 import authStore from "@/store/auth";
 export default {
@@ -49,6 +57,8 @@ export default {
       showCreateWalletModal: false,
       showEditWalletModal: false,
       walletToBeEdited: {},
+      showConfirmationToDeleteModal: false,
+      walletToBeDeleted: {},
     };
   },
   methods: {
@@ -60,7 +70,10 @@ export default {
     async reloadWalletsAndCloseModal() {
       this.showCreateWalletModal = false;
       this.showEditWalletModal = false;
+      this.showConfirmationToDeleteModal = false;
       await this.getUserData("wallets");
+      this.walletToBeDeleted = {};
+      this.walletToBeEdited = {};
     },
     openCreateWalletModal() {
       if (this.showCreateWalletModal) return;
@@ -71,12 +84,18 @@ export default {
       this.showEditWalletModal = true;
       this.walletToBeEdited = data;
     },
+    openConfirmationToDeleteModal(data) {
+      if (this.showConfirmationToDeleteModal) return;
+      this.showConfirmationToDeleteModal = true;
+      this.walletToBeDeleted = data;
+    },
   },
   components: {
     Wallet,
     DashboardActionButton,
     DashboardNotFoundMessage,
     DashboardWalletModal,
+    ConfirmationToDeleteModal,
   },
   props: {
     wallets: Array,

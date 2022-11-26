@@ -10,4 +10,7 @@ export default {
   editWallet(id, wallet) {
     return axios.put(`/api/wallet/${id}`, wallet).then((res) => res.data);
   },
+  deleteWallet(id) {
+    return axios.delete(`/api/wallet/${id}`).then((res) => res.data);
+  },
 };
