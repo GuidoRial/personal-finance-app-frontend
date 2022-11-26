@@ -53,11 +53,6 @@ export default {
       hover: false,
     };
   },
-  computed: {
-    isWalletPhysicalWallet() {
-      return this.wallet.isPhysicalWallet;
-    },
-  },
   methods: {
     openEditModal() {
       this.$emit("clickOnEditModalIcon", this.wallet);
