@@ -21,7 +21,6 @@ const authStore = defineStore("auth", {
         if (wallets === "wallets") {
           const walletStore = useWallet();
           this.user.wallets = await walletStore.getWallets();
-          this.user.totalBalance = {};
           this.sortWalletsAlphabetically();
           this.getTotalBalance();
           localStorage.setItem("user", JSON.stringify(this.user));
@@ -31,16 +30,18 @@ const authStore = defineStore("auth", {
       }
     },
     getTotalBalance() {
+      this.user.totalBalance = [];
       for (let wallet of this.user.wallets) {
-        if (!this.user.totalBalance[wallet.currency]) {
-          this.user.totalBalance[wallet.currency] = {
+        let walletToBeEdited = this.user.totalBalance.find(
+          (w) => w.currency === wallet.currency
+        );
+        if (!walletToBeEdited) {
+          this.user.totalBalance.push({
+            currency: wallet.currency,
             total: wallet.balance,
-          };
+          });
         } else {
-          this.user.totalBalance[wallet.currency] = {
-            total: (this.user.totalBalance[wallet.currency].total +=
-              wallet.balance),
-          };
+          walletToBeEdited.total += wallet.balance;
         }
       }
     },
