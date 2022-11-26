@@ -99,8 +99,8 @@ export default {
       await this.getUserData("wallets");
     },
     async reloadWalletsAndCloseModal() {
-      this.closeAllModals();
       await this.getUserData("wallets");
+      this.closeAllModals();
       this.returnWalletsToDefaultValue();
     },
     openCreateWalletModal() {

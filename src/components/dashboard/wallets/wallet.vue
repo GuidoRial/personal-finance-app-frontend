@@ -42,9 +42,6 @@ import Tooltip from "@/components/UX/Tooltip.vue";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "wallet",
-  created() {
-    console.log(this.wallet);
-  },
   props: {
     wallet: Object,
   },
