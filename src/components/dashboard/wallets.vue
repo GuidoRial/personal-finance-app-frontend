@@ -36,7 +36,7 @@ export default {
   name: "wallets",
   data() {
     return {
-      showCreateWalletModal: true,
+      showCreateWalletModal: false,
     };
   },
   methods: {

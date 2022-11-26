@@ -17,7 +17,6 @@ const authStore = defineStore("auth", {
     async login(credentials) {
       try {
         const res = await auth.login(credentials);
-        debugger;
         this.token = res.result.accessToken;
         this.user = res.result.user;
         localStorage.setItem("access-token", res.result.accessToken);

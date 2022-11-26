@@ -3,7 +3,7 @@
     <WelcomeBackMessage />
     <div class="wallets-and-budgets">
       <!-- <TotalBalance /> -->
-      <Wallets :wallets="user.wallets" />
+      <Wallets :wallets="wallets" />
       <!-- <Budgets /> -->
       <!-- <Savings /> -->
     </div>
@@ -18,16 +18,24 @@ import Wallets from "@/components/dashboard/wallets.vue";
 // import Budgets from "@/components/dashboard/budgets.vue";
 // import Savings from "@/components/dashboard/savings.vue";
 import RecentTransactions from "@/components/dashboard/recentTransactions.vue";
-import { mapState } from "pinia";
+import { mapActions, mapState } from "pinia";
 import authStore from "@/store/auth";
+import walletStore from "@/store/wallet";
 export default {
   name: "dashboard-page",
   data() {
     return {
       showWelcomeMessage: false,
+      wallets: [],
     };
   },
-  methods: {},
+  async created() {
+    this.wallets = await this.getWallets();
+    console.log(this.wallets);
+  },
+  methods: {
+    ...mapActions(walletStore, ["getWallets"]),
+  },
   computed: {
     ...mapState(authStore, ["user"]),
   },
