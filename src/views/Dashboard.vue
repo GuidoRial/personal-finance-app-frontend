@@ -24,7 +24,7 @@ export default {
   name: "dashboard-page",
   data() {
     return {
-      showWelcomeMessage: false,
+      showWelcomeMessage: true,
       wallets: [],
     };
   },

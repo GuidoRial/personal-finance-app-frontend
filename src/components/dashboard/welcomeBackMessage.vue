@@ -1,18 +1,26 @@
 <template>
   <div class="welcome-back" v-if="showWelcomeMessage">
-    <div>Bienvenido de vuelta, <span class="user-name">Guido</span></div>
+    <div>
+      Bienvenido de vuelta,
+      <span class="user-name">{{ this.user.username }}</span>
+    </div>
     <div class="close-btn" @click="close">
       <font-awesome-icon icon="fa-solid fa-xmark" />
     </div>
   </div>
 </template>
 <script>
+import authStore from "@/store/auth";
+import { mapState } from "pinia";
 export default {
   name: "welcomeBackMessage",
   data() {
     return {
-      showWelcomeMessage: false,
+      showWelcomeMessage: false, //@TODO => change to true
     };
+  },
+  computed: {
+    ...mapState(authStore, ["user"]),
   },
   methods: {
     close() {
@@ -24,7 +32,7 @@ export default {
 <style scoped>
 .welcome-back {
   background-color: var(--dark-gray);
-  width: 20rem;
+  width: 25rem;
   height: 3rem;
   display: flex;
   justify-content: center;
@@ -33,7 +41,7 @@ export default {
   border-radius: 2px;
   position: absolute;
   margin-top: 1rem;
-  animation: fadeIn 2s normal forwards;
+  animation: fadeIn 1s normal forwards;
   animation-delay: 2s;
 }
 .user-name {
@@ -44,7 +52,7 @@ export default {
 
 .close-btn {
   position: relative;
-  left: 45px;
+  left: 60px;
   bottom: 10px;
   cursor: pointer;
 }
