@@ -6,7 +6,16 @@
       <font-awesome-icon v-if="hover" icon="fa-solid fa-right-left" />
     </div>
     <div class="wallet-balance">
-      <h4>{{ wallet.balance }} {{ wallet.currency }}</h4>
+      <h4>
+        {{
+          wallet.currency === "ARS" ||
+          wallet.currency === "USD" ||
+          wallet.currency === "USDT"
+            ? "$"
+            : "€"
+        }}
+        {{ wallet.balance.toLocaleString() }} {{ wallet.currency }}
+      </h4>
     </div>
   </div>
 </template>
