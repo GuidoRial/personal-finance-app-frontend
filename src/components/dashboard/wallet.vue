@@ -3,17 +3,23 @@
     <div class="wallet-name">
       <font-awesome-icon icon="fa-solid fa-wallet" />
       <h4>{{ wallet.name }}</h4>
-      <font-awesome-icon v-if="hover" icon="fa-solid fa-right-left" />
-      <font-awesome-icon
-        v-if="hover"
-        icon="fa-solid fa-pen-to-square"
-        @click="openEditModal"
-      />
-      <font-awesome-icon
-        v-if="hover"
-        icon="fa-solid fa-trash"
-        @click="openConfirmationToDeleteModal"
-      />
+      <Tooltip text="Transferir fondos">
+        <font-awesome-icon v-if="hover" icon="fa-solid fa-right-left" />
+      </Tooltip>
+      <Tooltip text="Editar">
+        <font-awesome-icon
+          v-if="hover"
+          icon="fa-solid fa-pen-to-square"
+          @click="openEditModal"
+        />
+      </Tooltip>
+      <Tooltip text="Eliminar">
+        <font-awesome-icon
+          v-if="hover"
+          icon="fa-solid fa-trash"
+          @click="openConfirmationToDeleteModal"
+        />
+      </Tooltip>
     </div>
     <div class="wallet-balance">
       <h4>
@@ -30,6 +36,7 @@
   </div>
 </template>
 <script>
+import Tooltip from "@/components/UX/Tooltip.vue";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "wallet",
@@ -48,6 +55,9 @@ export default {
     openConfirmationToDeleteModal() {
       this.$emit("clickOnConfirmationToDeleteModalIcon", this.wallet);
     },
+  },
+  components: {
+    Tooltip,
   },
 };
 </script>
