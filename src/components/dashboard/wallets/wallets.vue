@@ -71,38 +71,54 @@ export default {
       showTransferModal: false,
     };
   },
+  computed: {
+    otherModalsAreOpen() {
+      return (
+        this.showCreateWalletModal ||
+        this.showEditWalletModal ||
+        this.showConfirmationToDeleteModal ||
+        this.showTransferModal
+      );
+    },
+  },
   methods: {
-    // @TODO => Avoid opening modals over each other
     ...mapActions(authStore, ["getUserData"]),
+    closeAllModals() {
+      this.showCreateWalletModal = false;
+      this.showEditWalletModal = false;
+      this.showConfirmationToDeleteModal = false;
+      this.showTransferModal = false;
+    },
+    returnWalletsToDefaultValue() {
+      this.walletToBeDeleted = {};
+      this.walletToBeEdited = {};
+      this.originWallet = {};
+    },
     async afterCreatingWallet() {
       this.showCreateWalletModal = false;
       await this.getUserData("wallets");
     },
     async reloadWalletsAndCloseModal() {
-      this.showCreateWalletModal = false;
-      this.showEditWalletModal = false;
-      this.showConfirmationToDeleteModal = false;
-      this.showTransferModal = false;
+      this.closeAllModals();
       await this.getUserData("wallets");
-      this.walletToBeDeleted = {};
-      this.walletToBeEdited = {};
-      this.originWallet = {};
+      this.returnWalletsToDefaultValue();
     },
     openCreateWalletModal() {
-      if (this.showCreateWalletModal) return;
+      if (this.otherModalsAreOpen) return;
       this.showCreateWalletModal = true;
     },
     openEditWalletModal(data) {
-      if (this.showEditWalletModal) return;
+      if (this.otherModalsAreOpen) return;
       this.showEditWalletModal = true;
       this.walletToBeEdited = data;
     },
     openConfirmationToDeleteModal(data) {
-      if (this.showConfirmationToDeleteModal) return;
+      if (this.otherModalsAreOpen) return;
       this.showConfirmationToDeleteModal = true;
       this.walletToBeDeleted = data;
     },
     openTransferMoneyModal(data) {
+      if (this.otherModalsAreOpen) return;
       this.originWallet = data;
       this.showTransferModal = true;
     },

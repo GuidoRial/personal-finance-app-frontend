@@ -78,7 +78,6 @@ export default {
         w._id !== this.originWallet._id &&
         w.currency === this.originWallet.currency
     );
-    // @TODO => Handle no wallets to transfer to
   },
   methods: {
     ...mapActions(useWallet, ["transferFromWalletToWallet"]),

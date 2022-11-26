@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      hover: false, // @TODO => Make it always true in responsive
+      hover: false,
     };
   },
   methods: {
