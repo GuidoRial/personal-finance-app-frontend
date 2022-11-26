@@ -64,7 +64,7 @@
 </template>
 <script>
 import { mapActions } from "pinia";
-import userStore from "../store/user";
+import userStore from "../../store/user";
 import AuthButton from "./authButton.vue";
 import AuthRedirectText from "./authRedirectText.vue";
 
@@ -84,19 +84,6 @@ export default {
     disableButton() {
       return (
         (!this.isLogin && this.userData.username?.length === 0) ||
-        this.userData.email?.length === 0 ||
-        this.userData.password?.length === 0
-      );
-    },
-    disableCreateAccountButton() {
-      return (
-        this.userData.username?.length === 0 ||
-        this.userData.email?.length === 0 ||
-        this.userData.password?.length === 0
-      );
-    },
-    disableLoginButton() {
-      return (
         this.userData.email?.length === 0 ||
         this.userData.password?.length === 0
       );

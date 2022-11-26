@@ -10,9 +10,6 @@ export default {
     Header,
     Viewer,
   },
-  mounted() {
-    console.log(this.getRoute);
-  },
   computed: {
     getRoute() {
       return this.$route.name;
@@ -44,5 +41,36 @@ export default {
 body {
   margin: 0;
   padding: 0;
+}
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.rounded-circle {
+  border-radius: 50%;
+}
+
+.m-2 {
+  margin: 1.5rem;
+}
+.flex-column {
+  flex-direction: column;
+}
+.gap-1 {
+  gap: 1rem;
+}
+
+.primary {
+  color: var(--primary);
+  font-weight: 700;
+  font-family: "Gothic A1", sans-serif;
 }
 </style>

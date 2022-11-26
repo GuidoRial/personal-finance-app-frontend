@@ -1,25 +1,25 @@
 <template>
-  <div class="savings">
+  <div class="budgets">
     <div class="title">
-      <h3>Ahorros</h3>
+      <h3>Mis presupuestos</h3>
     </div>
-    <Savings />
-    <Savings />
-    <Savings />
+    <DashboardBudget />
+    <DashboardBudget />
+    <DashboardBudget />
   </div>
 </template>
 <script>
-import Savings from "@/components/dashboard/dashboardSaving.vue";
+import DashboardBudget from "@/components/dashboard/budgets/dashboardBudget.vue";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "savings",
+  name: "budgets",
   components: {
-    Savings,
+    DashboardBudget,
   },
 };
 </script>
 <style scoped>
-.savings {
+.budgets {
   padding: 1rem 0 0 0;
   border-bottom: 2px solid var(--dark-gray);
 }

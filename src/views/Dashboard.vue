@@ -2,10 +2,10 @@
   <div class="dashboard">
     <WelcomeBackMessage />
     <div class="wallets-and-budgets">
-      <TotalBalance />
-      <Wallets />
-      <Budgets />
-      <Savings />
+      <!-- <TotalBalance /> -->
+      <Wallets :wallets="user.wallets" />
+      <!-- <Budgets /> -->
+      <!-- <Savings /> -->
     </div>
     <RecentTransactions />
   </div>
@@ -13,25 +13,36 @@
 
 <script>
 import WelcomeBackMessage from "@/components/dashboard/welcomeBackMessage.vue";
-import TotalBalance from "@/components/dashboard/totalBalance.vue";
-import Wallets from "@/components/dashboard/wallets.vue";
-import Budgets from "@/components/dashboard/budgets.vue";
-import Savings from "@/components/dashboard/savings.vue";
-import RecentTransactions from "@/components/dashboard/recentTransactions.vue";
+// import TotalBalance from "@/components/dashboard/totalBalance.vue";
+import Wallets from "@/components/dashboard/wallets/wallets.vue";
+// import Budgets from "@/components/dashboard/budgets.vue";
+// import Savings from "@/components/dashboard/savings.vue";
+import RecentTransactions from "@/components/dashboard/transactions/recentTransactions.vue";
+import { mapActions, mapState } from "pinia";
+import authStore from "@/store/auth";
 export default {
   name: "dashboard-page",
   data() {
     return {
-      showWelcomeMessage: false,
+      showWelcomeMessage: true,
+      wallets: [],
     };
   },
-  methods: {},
+  async created() {
+    await this.getUserData("wallets");
+  },
+  methods: {
+    ...mapActions(authStore, ["getUserData"]),
+  },
+  computed: {
+    ...mapState(authStore, ["user"]),
+  },
   components: {
     WelcomeBackMessage,
-    TotalBalance,
+    // TotalBalance,
     Wallets,
-    Budgets,
-    Savings,
+    // Budgets,
+    // Savings,
     RecentTransactions,
   },
 };

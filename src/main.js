@@ -15,6 +15,9 @@ import {
   faPiggyBank,
   faMoneyBillTransfer,
   faBuildingColumns,
+  faPenToSquare,
+  faTrash,
+  faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -25,7 +28,10 @@ library.add(
   faTable,
   faPiggyBank,
   faMoneyBillTransfer,
-  faBuildingColumns
+  faBuildingColumns,
+  faPenToSquare,
+  faTrash,
+  faArrowDown
 );
 
 createApp(App)
