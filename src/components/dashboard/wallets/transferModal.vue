@@ -85,7 +85,6 @@ export default {
       this.$emit("cancelTransfer");
     },
     async triggerTransfer() {
-      // @TODO => Transfer when origin.balance === 0
       // eslint-disable-next-line no-useless-catch, no-empty
       try {
         this.errorMessage = "";
