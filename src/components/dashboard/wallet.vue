@@ -14,7 +14,7 @@
             ? "$"
             : "€"
         }}
-        {{ wallet.balance.toLocaleString() }} {{ wallet.currency }}
+        {{ wallet.balance.toLocaleString("es-ar") }} {{ wallet.currency }}
       </h4>
     </div>
   </div>
