@@ -1,7 +1,11 @@
 <template>
   <div class="wallet" @mouseenter="hover = true" @mouseleave="hover = false">
     <div class="wallet-name">
-      <font-awesome-icon icon="fa-solid fa-wallet" />
+      <font-awesome-icon
+        :icon="
+          wallet.isPhysicalWallet ? 'fa-solid fa-wallet' : 'fa-solid fa-cloud'
+        "
+      />
       <h4>{{ wallet.name }}</h4>
       <Tooltip text="Transferir fondos">
         <font-awesome-icon
@@ -35,10 +39,12 @@
 </template>
 <script>
 import Tooltip from "@/components/UX/Tooltip.vue";
-// @TODO => Add different icons for each type of wallet
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "wallet",
+  created() {
+    console.log(this.wallet);
+  },
   props: {
     wallet: Object,
   },
@@ -46,6 +52,11 @@ export default {
     return {
       hover: false,
     };
+  },
+  computed: {
+    isWalletPhysicalWallet() {
+      return this.wallet.isPhysicalWallet;
+    },
   },
   methods: {
     openEditModal() {
@@ -76,6 +87,7 @@ export default {
 }
 .wallet-name {
   display: flex;
+  justify-content: space-between;
   gap: 1rem;
 }
 .wallet {

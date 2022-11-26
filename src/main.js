@@ -18,6 +18,7 @@ import {
   faPenToSquare,
   faTrash,
   faArrowDown,
+  faCloud,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -31,7 +32,8 @@ library.add(
   faBuildingColumns,
   faPenToSquare,
   faTrash,
-  faArrowDown
+  faArrowDown,
+  faCloud
 );
 
 createApp(App)
