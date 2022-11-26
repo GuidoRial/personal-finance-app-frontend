@@ -1,5 +1,5 @@
 <template>
-  <div class="create-wallet-modal">
+  <div class="create-wallet-modal" :style="isEdit && 'height: 20rem;'">
     <form class="create-wallet-form" v-if="!loading">
       <h4 class="create-wallet-title">
         {{ this.isEdit ? "Editar Billetera" : "Crear billetera" }}
@@ -15,7 +15,7 @@
         class="create-wallet-input"
         placeholder="Descripción (opcional)"
       />
-      <div class="select-container input-group">
+      <div class="select-container input-group" v-if="!isEdit">
         <label>Tipo de billetera</label>
         <div class="physical-wallet-section">
           <label for="s2d">Es una billetera física: </label>
@@ -43,8 +43,8 @@
           placeholder="Número de CBU, CVU, Wallet Address"
         />
       </div>
-      <label>Divisa</label>
-      <div class="select-container">
+      <label v-if="!isEdit">Divisa</label>
+      <div class="select-container" v-if="!isEdit">
         <select v-model="walletData.currency">
           <option v-for="(userOption, i) in this.user.currencies" :key="i">
             {{ userOption }}
@@ -52,6 +52,7 @@
         </select>
       </div>
       <input
+        v-if="!isEdit"
         v-model="walletData.balance"
         class="create-wallet-input"
         type="number"
@@ -149,8 +150,9 @@ export default {
           await this.createWallet(this.walletData);
           this.$emit("walletCreated");
         } else {
-          const { _id } = this.walletData;
-          await this.editWallet(_id, this.walletData);
+          const { _id, name, description } = this.walletData;
+          await this.editWallet(_id, { name, description });
+          //User is only able to change those values
           this.$emit("walletEdited");
         }
         this.loading = false;

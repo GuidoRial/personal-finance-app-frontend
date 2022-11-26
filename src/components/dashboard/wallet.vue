@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      hover: false,
+      hover: false, // @TODO => Make it always true in responsive
     };
   },
   methods: {
