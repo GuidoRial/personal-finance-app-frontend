@@ -30,7 +30,7 @@
     v-if="showEditWalletModal"
     :isEdit="true"
     @cancelAction="reloadWalletsAndCloseModal"
-    @walletCreated="showEditWalletModal = false"
+    @walletEdited="reloadWalletsAndCloseModal"
     :walletToBeEdited="walletToBeEdited"
   />
 </template>
