@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import ModalActionButton from "@/components/dashboard/modalActionButton.vue";
+import ModalActionButton from "@/components/dashboard/shared/modalActionButton.vue";
 import { mapActions } from "pinia";
 import walletStore from "@/store/wallet";
 export default {

@@ -16,7 +16,7 @@
 
 <script>
 import SecondaryButton from "@/components/secondaryButton.vue";
-import DashboardTransaction from "@/components/dashboard/dashboardTransaction.vue";
+import DashboardTransaction from "@/components/dashboard/transactions/dashboardTransaction.vue";
 export default {
   name: "recent-transactions",
   components: {

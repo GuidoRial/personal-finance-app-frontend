@@ -1,7 +1,7 @@
 <template>
-  <div class="create-wallet-modal" :style="isEdit && 'height: 20rem;'">
-    <form class="create-wallet-form" v-if="!loading">
-      <h4 class="create-wallet-title">
+  <div class="wallet-modal" :style="isEdit && 'height: 20rem;'">
+    <form class="wallet-form" v-if="!loading">
+      <h4 class="wallet-title">
         {{ this.isEdit ? "Editar Billetera" : "Crear billetera" }}
       </h4>
       <label>Información general</label>
@@ -81,7 +81,7 @@
       class="d-flex justify-content-center align-items-center flex-column"
       style="height: 100%"
     >
-      <h4 class="create-wallet-title">
+      <h4 class="wallet-title">
         {{ this.isEdit ? "Editando billetera" : "Creando billetera" }}
       </h4>
       <LoadingDots />
@@ -91,7 +91,7 @@
 <script>
 import authStore from "@/store/auth";
 import { mapActions, mapState } from "pinia";
-import ModalActionButton from "@/components/dashboard/modalActionButton.vue";
+import ModalActionButton from "@/components/dashboard/shared/modalActionButton.vue";
 import LoadingDots from "@/components/UX/loadingDots.vue";
 import walletStore from "@/store/wallet";
 export default {
@@ -211,18 +211,18 @@ export default {
   gap: 0.5rem;
   border-radius: 3px;
 }
-.create-wallet-title {
+.wallet-title {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
-.create-wallet-form {
+.wallet-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.8rem;
   width: 80%;
 }
-.create-wallet-modal {
+.wallet-modal {
   background-color: var(--dark-gray);
   display: flex;
   flex-direction: column;

@@ -42,11 +42,11 @@
   />
 </template>
 <script>
-import Wallet from "@/components/dashboard/wallet.vue";
-import DashboardActionButton from "@/components/dashboard/dashboardActionButton.vue";
-import DashboardNotFoundMessage from "@/components/dashboard/dashboardNotFoundMessage.vue";
-import DashboardWalletModal from "@/components/dashboard/dashboardWalletModal.vue";
-import ConfirmationToDeleteModal from "@/components/dashboard/dashboardConfirmationToDeleteModal.vue";
+import Wallet from "@/components/dashboard/wallets/wallet.vue";
+import DashboardActionButton from "@/components/dashboard/shared/dashboardActionButton.vue";
+import DashboardNotFoundMessage from "@/components/dashboard/shared/dashboardNotFoundMessage.vue";
+import DashboardWalletModal from "@/components/dashboard/wallets/dashboardWalletModal.vue";
+import ConfirmationToDeleteModal from "@/components/dashboard/wallets/dashboardConfirmationToDeleteModal.vue";
 import { mapActions } from "pinia";
 import authStore from "@/store/auth";
 export default {
