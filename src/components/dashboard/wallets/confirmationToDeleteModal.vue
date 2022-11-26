@@ -5,6 +5,9 @@
       ¿Estas seguro que deseas eliminar
       {{ walletToBeDeleted.name }}?
     </h2>
+    <p v-if="errorMessage.length" class="error-message">
+      {{ errorMessage }}
+    </p>
     <div class="button-group">
       <ModalActionButton :isCancel="true" text="Cancelar" @click="cancel" />
       <ModalActionButton text="Eliminar" @click="triggerDeletion" />
@@ -17,6 +20,11 @@ import { mapActions } from "pinia";
 import walletStore from "@/store/wallet";
 export default {
   name: "confirmation-to-delete-modal",
+  data() {
+    return {
+      errorMessage: "",
+    };
+  },
   components: {
     ModalActionButton,
   },
@@ -29,7 +37,11 @@ export default {
       this.$emit("cancelDeleteWallet");
     },
     async triggerDeletion() {
-      // @TODO => Where to send wallet money on delete
+      if (this.walletToBeDeleted.balance > 0) {
+        this.errorMessage =
+          "No puedes eliminar una billetera con fondos, debes transferirlos a otra billetera antes";
+        return;
+      }
       // eslint-disable-next-line no-useless-catch
       try {
         this.deleteWallet(this.walletToBeDeleted._id);
@@ -42,6 +54,14 @@ export default {
 };
 </script>
 <style scoped>
+.error-message {
+  border: 1px solid var(--red);
+  background-color: var(--red);
+  color: var(--white);
+  font-weight: 500;
+  margin: 0.4rem 0 !important;
+  padding: 0.5rem;
+}
 .confirmation-to-delete-modal {
   background-color: var(--dark-gray);
   display: flex;

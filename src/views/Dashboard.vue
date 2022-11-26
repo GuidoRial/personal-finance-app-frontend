@@ -2,7 +2,7 @@
   <div class="dashboard">
     <WelcomeBackMessage />
     <div class="wallets-and-budgets">
-      <!-- <TotalBalance /> -->
+      <TotalBalance />
       <Wallets :wallets="user.wallets" />
       <!-- <Budgets /> -->
       <!-- <Savings /> -->
@@ -13,7 +13,7 @@
 
 <script>
 import WelcomeBackMessage from "@/components/dashboard/welcomeBackMessage.vue";
-// import TotalBalance from "@/components/dashboard/totalBalance.vue";
+import TotalBalance from "@/components/dashboard/totalBalance/totalBalance.vue";
 import Wallets from "@/components/dashboard/wallets/wallets.vue";
 // import Budgets from "@/components/dashboard/budgets.vue";
 // import Savings from "@/components/dashboard/savings.vue";
@@ -39,7 +39,7 @@ export default {
   },
   components: {
     WelcomeBackMessage,
-    // TotalBalance,
+    TotalBalance,
     Wallets,
     // Budgets,
     // Savings,

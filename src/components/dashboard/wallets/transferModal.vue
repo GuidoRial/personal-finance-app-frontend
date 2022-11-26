@@ -78,7 +78,6 @@ export default {
         w._id !== this.originWallet._id &&
         w.currency === this.originWallet.currency
     );
-    // @TODO => Handle no wallets to transfer to
   },
   methods: {
     ...mapActions(useWallet, ["transferFromWalletToWallet"]),
@@ -89,6 +88,10 @@ export default {
       // eslint-disable-next-line no-useless-catch, no-empty
       try {
         this.errorMessage = "";
+        if (this.originWallet.balance === 0) {
+          this.errorMessage = "No tenes saldo para transferir";
+          return;
+        }
         if (this.amount == 0) {
           this.errorMessage = "El monto a transferir no puede ser 0";
           return;

@@ -21,11 +21,32 @@ const authStore = defineStore("auth", {
         if (wallets === "wallets") {
           const walletStore = useWallet();
           this.user.wallets = await walletStore.getWallets();
+          this.sortWalletsAlphabetically();
+          this.getTotalBalance();
           localStorage.setItem("user", JSON.stringify(this.user));
         }
       } catch (e) {
         throw e;
       }
+    },
+    getTotalBalance() {
+      this.user.totalBalance = [];
+      for (let wallet of this.user.wallets) {
+        let walletToBeEdited = this.user.totalBalance.find(
+          (w) => w.currency === wallet.currency
+        );
+        if (!walletToBeEdited) {
+          this.user.totalBalance.push({
+            currency: wallet.currency,
+            total: wallet.balance,
+          });
+        } else {
+          walletToBeEdited.total += wallet.balance;
+        }
+      }
+    },
+    sortWalletsAlphabetically() {
+      this.user.wallets.sort((a, b) => a.currency.localeCompare(b.currency));
     },
     async login(credentials) {
       try {
