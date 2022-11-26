@@ -88,19 +88,6 @@ export default {
         this.userData.password?.length === 0
       );
     },
-    disableCreateAccountButton() {
-      return (
-        this.userData.username?.length === 0 ||
-        this.userData.email?.length === 0 ||
-        this.userData.password?.length === 0
-      );
-    },
-    disableLoginButton() {
-      return (
-        this.userData.email?.length === 0 ||
-        this.userData.password?.length === 0
-      );
-    },
   },
   methods: {
     ...mapActions(userStore, ["getAllEmails", "getAllNames"]),

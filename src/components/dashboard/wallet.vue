@@ -2,11 +2,11 @@
   <div class="wallet" @mouseenter="hover = true" @mouseleave="hover = false">
     <div class="wallet-name">
       <font-awesome-icon icon="fa-solid fa-wallet" />
-      <h4>MercadoPago</h4>
+      <h4>{{ wallet.name }}</h4>
       <font-awesome-icon v-if="hover" icon="fa-solid fa-right-left" />
     </div>
     <div class="wallet-balance">
-      <h4>1000 ARS</h4>
+      <h4>{{ wallet.balance }} {{ wallet.currency }}</h4>
     </div>
   </div>
 </template>
@@ -14,6 +14,9 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "wallet",
+  props: {
+    wallet: Object,
+  },
   data() {
     return {
       hover: false,
