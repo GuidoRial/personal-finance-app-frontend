@@ -19,6 +19,14 @@ const useWallet = defineStore("wallet", {
         throw e;
       }
     },
+    async editWallet(id, newWallet) {
+      try {
+        const res = await walletService.editWallet(id, newWallet);
+        return res.result;
+      } catch (e) {
+        throw e;
+      }
+    },
     async getWallets() {
       try {
         const res = await walletService.getWallets();

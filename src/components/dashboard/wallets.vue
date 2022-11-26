@@ -13,6 +13,7 @@
       v-for="(wallet, i) in wallets"
       :wallet="wallet"
       :key="i"
+      @clickOnEditModalIcon="openEditWalletModal"
     />
     <DashboardNotFoundMessage
       v-else
@@ -20,36 +21,62 @@
       secondText="Hacé click en el botón de 'Crear billetera' para crear una."
     />
   </div>
-  <CreateWalletModal
+  <DashboardWalletModal
     v-if="showCreateWalletModal"
-    @cancelAction="showCreateWalletModal = false"
-    @walletCreated="showCreateWalletModal = false"
+    @cancelAction="reloadWalletsAndCloseModal"
+    @walletCreated="afterCreatingWallet"
+  />
+  <DashboardWalletModal
+    v-if="showEditWalletModal"
+    :isEdit="true"
+    @cancelAction="reloadWalletsAndCloseModal"
+    @walletCreated="showEditWalletModal = false"
+    :walletToBeEdited="walletToBeEdited"
   />
 </template>
 <script>
 import Wallet from "@/components/dashboard/wallet.vue";
 import DashboardActionButton from "@/components/dashboard/dashboardActionButton.vue";
 import DashboardNotFoundMessage from "@/components/dashboard/dashboardNotFoundMessage.vue";
-import CreateWalletModal from "@/components/dashboard/createWalletModal.vue";
+import DashboardWalletModal from "@/components/dashboard/dashboardWalletModal.vue";
+import { mapActions } from "pinia";
+import authStore from "@/store/auth";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "wallets",
   data() {
     return {
       showCreateWalletModal: false,
+      showEditWalletModal: false,
+      walletToBeEdited: {},
     };
   },
   methods: {
+    ...mapActions(authStore, ["getUserData"]),
+    async afterCreatingWallet() {
+      this.showCreateWalletModal = false;
+      await this.getUserData("wallets");
+    },
+    async reloadWalletsAndCloseModal() {
+      this.showCreateWalletModal = false;
+      this.showEditWalletModal = false;
+      await this.getUserData("wallets");
+    },
     openCreateWalletModal() {
       if (this.showCreateWalletModal) return;
       this.showCreateWalletModal = true;
+    },
+    openEditWalletModal(data) {
+      if (this.showEditWalletModal) return;
+      this.showEditWalletModal = true;
+      this.walletToBeEdited = data;
     },
   },
   components: {
     Wallet,
     DashboardActionButton,
     DashboardNotFoundMessage,
-    CreateWalletModal,
+    DashboardWalletModal,
   },
   props: {
     wallets: Array,

@@ -4,7 +4,11 @@
       <font-awesome-icon icon="fa-solid fa-wallet" />
       <h4>{{ wallet.name }}</h4>
       <font-awesome-icon v-if="hover" icon="fa-solid fa-right-left" />
-      <font-awesome-icon v-if="hover" icon="fa-solid fa-pen-to-square" />
+      <font-awesome-icon
+        v-if="hover"
+        icon="fa-solid fa-pen-to-square"
+        @click="openEditModal"
+      />
       <font-awesome-icon v-if="hover" icon="fa-solid fa-trash" />
     </div>
     <div class="wallet-balance">
@@ -32,6 +36,11 @@ export default {
     return {
       hover: false,
     };
+  },
+  methods: {
+    openEditModal() {
+      this.$emit("clickOnEditModalIcon", this.wallet);
+    },
   },
 };
 </script>

@@ -7,4 +7,7 @@ export default {
   getWallets() {
     return axios.get("/api/wallets").then((res) => res.data);
   },
+  editWallet(id, wallet) {
+    return axios.put(`/api/wallet/${id}`, wallet).then((res) => res.data);
+  },
 };

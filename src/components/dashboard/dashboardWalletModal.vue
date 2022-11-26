@@ -1,7 +1,9 @@
 <template>
   <div class="create-wallet-modal">
     <form class="create-wallet-form" v-if="!loading">
-      <h4 class="create-wallet-title">Crear billetera</h4>
+      <h4 class="create-wallet-title">
+        {{ this.isEdit ? "Editar Billetera" : "Crear billetera" }}
+      </h4>
       <label>Información general</label>
       <input
         v-model="walletData.name"
@@ -68,14 +70,19 @@
       :style="errorMessage.length == 0 && 'margin-top: 1rem;'"
     >
       <ModalActionButton :isCancel="true" text="Cancelar" @click="cancel" />
-      <ModalActionButton text="Crear billetera" @click="create" />
+      <ModalActionButton
+        :text="this.isEdit ? 'Editar Billetera' : 'Crear billetera'"
+        @click="sendWallet"
+      />
     </div>
     <div
       v-else
       class="d-flex justify-content-center align-items-center flex-column"
       style="height: 100%"
     >
-      <h4 class="create-wallet-title">Creando billetera</h4>
+      <h4 class="create-wallet-title">
+        {{ this.isEdit ? "Editando billetera" : "Creando billetera" }}
+      </h4>
       <LoadingDots />
     </div>
   </div>
@@ -88,6 +95,13 @@ import LoadingDots from "@/components/UX/loadingDots.vue";
 import walletStore from "@/store/wallet";
 export default {
   name: "create-wallet-modal",
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false,
+    },
+    walletToBeEdited: Object,
+  },
   data() {
     return {
       loading: false,
@@ -112,10 +126,12 @@ export default {
       return name.length > 0;
     },
   },
-  mounted() {},
+  created() {
+    this.isEdit && (this.walletData = this.walletToBeEdited);
+  },
   methods: {
-    ...mapActions(walletStore, ["createWallet"]),
-    async create() {
+    ...mapActions(walletStore, ["createWallet", "editWallet"]),
+    async sendWallet() {
       this.errorMessage = "";
       if (this.walletData.isPhysicalWallet) {
         (this.walletData.identifier.identifierType = null),
@@ -129,9 +145,15 @@ export default {
 
       this.loading = true;
       try {
-        await this.createWallet(this.walletData);
+        if (!this.isEdit) {
+          await this.createWallet(this.walletData);
+          this.$emit("walletCreated");
+        } else {
+          const { _id } = this.walletData;
+          await this.editWallet(_id, this.walletData);
+          this.$emit("walletEdited");
+        }
         this.loading = false;
-        this.$emit("walletCreated");
         // eslint-disable-next-line no-useless-catch
       } catch (e) {
         throw e;
