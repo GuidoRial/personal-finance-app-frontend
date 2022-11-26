@@ -41,6 +41,14 @@ const useWallet = defineStore("wallet", {
         throw e;
       }
     },
+    async transferFromWalletToWallet(id, data) {
+      try {
+        const res = await walletService.transfer(id, data);
+        return res.result;
+      } catch (e) {
+        throw e;
+      }
+    },
   },
 });
 

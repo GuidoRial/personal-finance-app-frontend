@@ -64,4 +64,13 @@ body {
 .flex-column {
   flex-direction: column;
 }
+.gap-1 {
+  gap: 1rem;
+}
+
+.primary {
+  color: var(--primary);
+  font-weight: 700;
+  font-family: "Gothic A1", sans-serif;
+}
 </style>

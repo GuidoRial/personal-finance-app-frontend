@@ -36,7 +36,6 @@ const authStore = defineStore("auth", {
         localStorage.setItem("user", JSON.stringify(res.result.user));
         return res.result;
       } catch (e) {
-        console.log(e);
         throw e;
       }
     },
@@ -50,7 +49,6 @@ const authStore = defineStore("auth", {
         window.localStorage.setItem("user", JSON.stringify(this.user));
         return res.result;
       } catch (e) {
-        console.log(e);
         throw e;
       }
     },

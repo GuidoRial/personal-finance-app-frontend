@@ -9,12 +9,13 @@
       />
     </div>
     <Wallet
-      v-if="wallets.length"
+      v-if="wallets?.length"
       v-for="(wallet, i) in wallets"
       :wallet="wallet"
       :key="i"
       @clickOnEditModalIcon="openEditWalletModal"
       @clickOnConfirmationToDeleteModalIcon="openConfirmationToDeleteModal"
+      @clickOnOpenTransferModal="openTransferMoneyModal"
     />
     <DashboardNotFoundMessage
       v-else
@@ -40,6 +41,12 @@
     @cancelDeleteWallet="showConfirmationToDeleteModal = false"
     @walletDeleted="reloadWalletsAndCloseModal"
   />
+  <TransferModal
+    v-if="showTransferModal"
+    :originWallet="originWallet"
+    @cancelTransfer="this.showTransferModal = false"
+    @transferFinished="reloadWalletsAndCloseModal"
+  />
 </template>
 <script>
 import Wallet from "@/components/dashboard/wallets/wallet.vue";
@@ -47,6 +54,7 @@ import DashboardActionButton from "@/components/dashboard/shared/dashboardAction
 import DashboardNotFoundMessage from "@/components/dashboard/shared/dashboardNotFoundMessage.vue";
 import interactionWalletModal from "@/components/dashboard/wallets/walletModal.vue";
 import ConfirmationToDeleteModal from "@/components/dashboard/wallets/confirmationToDeleteModal.vue";
+import TransferModal from "@/components/dashboard/wallets/transferModal.vue";
 import { mapActions } from "pinia";
 import authStore from "@/store/auth";
 export default {
@@ -59,9 +67,12 @@ export default {
       walletToBeEdited: {},
       showConfirmationToDeleteModal: false,
       walletToBeDeleted: {},
+      originWallet: {},
+      showTransferModal: false,
     };
   },
   methods: {
+    // @TODO => Avoid opening modals over each other
     ...mapActions(authStore, ["getUserData"]),
     async afterCreatingWallet() {
       this.showCreateWalletModal = false;
@@ -71,9 +82,11 @@ export default {
       this.showCreateWalletModal = false;
       this.showEditWalletModal = false;
       this.showConfirmationToDeleteModal = false;
+      this.showTransferModal = false;
       await this.getUserData("wallets");
       this.walletToBeDeleted = {};
       this.walletToBeEdited = {};
+      this.originWallet = {};
     },
     openCreateWalletModal() {
       if (this.showCreateWalletModal) return;
@@ -89,6 +102,10 @@ export default {
       this.showConfirmationToDeleteModal = true;
       this.walletToBeDeleted = data;
     },
+    openTransferMoneyModal(data) {
+      this.originWallet = data;
+      this.showTransferModal = true;
+    },
   },
   components: {
     Wallet,
@@ -96,6 +113,7 @@ export default {
     DashboardNotFoundMessage,
     interactionWalletModal,
     ConfirmationToDeleteModal,
+    TransferModal,
   },
   props: {
     wallets: Array,

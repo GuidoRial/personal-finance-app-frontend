@@ -29,6 +29,7 @@ export default {
       this.$emit("cancelDeleteWallet");
     },
     async triggerDeletion() {
+      // @TODO => Where to send wallet money on delete
       // eslint-disable-next-line no-useless-catch
       try {
         this.deleteWallet(this.walletToBeDeleted._id);

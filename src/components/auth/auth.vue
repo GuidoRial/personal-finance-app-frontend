@@ -64,7 +64,7 @@
 </template>
 <script>
 import { mapActions } from "pinia";
-import userStore from "../store/user";
+import userStore from "../../store/user";
 import AuthButton from "./authButton.vue";
 import AuthRedirectText from "./authRedirectText.vue";
 

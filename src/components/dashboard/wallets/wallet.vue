@@ -4,7 +4,11 @@
       <font-awesome-icon icon="fa-solid fa-wallet" />
       <h4>{{ wallet.name }}</h4>
       <Tooltip text="Transferir fondos">
-        <font-awesome-icon v-if="hover" icon="fa-solid fa-right-left" />
+        <font-awesome-icon
+          v-if="hover"
+          icon="fa-solid fa-right-left"
+          @click="openTransferModal"
+        />
       </Tooltip>
       <Tooltip text="Editar">
         <font-awesome-icon
@@ -23,13 +27,7 @@
     </div>
     <div class="wallet-balance">
       <h4>
-        {{
-          wallet.currency === "ARS" ||
-          wallet.currency === "USD" ||
-          wallet.currency === "USDT"
-            ? "$"
-            : "€"
-        }}
+        {{ this.getSymbol(wallet) }}
         {{ wallet.balance.toLocaleString("es-ar") }} {{ wallet.currency }}
       </h4>
     </div>
@@ -54,6 +52,16 @@ export default {
     },
     openConfirmationToDeleteModal() {
       this.$emit("clickOnConfirmationToDeleteModalIcon", this.wallet);
+    },
+    openTransferModal() {
+      this.$emit("clickOnOpenTransferModal", this.wallet);
+    },
+    getSymbol(wallet) {
+      return wallet.currency === "ARS" ||
+        wallet.currency === "USD" ||
+        wallet.currency === "USDT"
+        ? "$"
+        : "€";
     },
   },
   components: {

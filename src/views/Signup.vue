@@ -2,7 +2,7 @@
   <Auth @dataCollected="createAccount" />
 </template>
 <script>
-import Auth from "@/components/auth.vue";
+import Auth from "@/components/auth/auth.vue";
 import authStore from "@/store/auth";
 import { mapActions } from "pinia";
 export default {

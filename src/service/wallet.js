@@ -13,4 +13,9 @@ export default {
   deleteWallet(id) {
     return axios.delete(`/api/wallet/${id}`).then((res) => res.data);
   },
+  transfer(id, data) {
+    return axios
+      .put(`/api/wallet/transfer/${id}`, data)
+      .then((res) => res.data);
+  },
 };
