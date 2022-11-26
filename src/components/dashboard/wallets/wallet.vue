@@ -35,6 +35,7 @@
 </template>
 <script>
 import Tooltip from "@/components/UX/Tooltip.vue";
+// @TODO => Add different icons for each type of wallet
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "wallet",
